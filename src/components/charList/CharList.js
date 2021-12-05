@@ -1,3 +1,4 @@
+import React from "react";
 import './charList.scss';
 import abyss from '../../resources/img/abyss.jpg';
 

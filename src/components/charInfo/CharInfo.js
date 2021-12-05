@@ -1,3 +1,4 @@
+import React from "react";
 import './charInfo.scss';
 import thor from '../../resources/img/thor.jpeg';
 
