@@ -1,5 +1,6 @@
 import React from "react";
 import { Component } from "react";
+import PropTypes from 'prop-types';
 
 import MarvelService from "../../services/MarvelService";
 import ErrorMessage from "../errorMessage/errorMessage";
@@ -108,5 +109,7 @@ class CharList extends Component {
         )
     }
 }
-
+CharList.propTypes = {
+    onCharSelected: PropTypes.func.isRequired
+}
 export default CharList;
