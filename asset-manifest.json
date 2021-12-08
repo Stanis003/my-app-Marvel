@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.8eed7bab.chunk.css",
+    "main.js": "/static/js/main.376a1135.chunk.js",
+    "main.js.map": "/static/js/main.376a1135.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.f0bb1af4.js",
+    "runtime-main.js.map": "/static/js/runtime-main.f0bb1af4.js.map",
+    "static/js/2.bbb1be49.chunk.js": "/static/js/2.bbb1be49.chunk.js",
+    "static/js/2.bbb1be49.chunk.js.map": "/static/js/2.bbb1be49.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.96b75eb3919f4c43afb9b4da2a74f6be.js": "/precache-manifest.96b75eb3919f4c43afb9b4da2a74f6be.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.8eed7bab.chunk.css.map": "/static/css/main.8eed7bab.chunk.css.map",
+    "static/js/2.bbb1be49.chunk.js.LICENSE.txt": "/static/js/2.bbb1be49.chunk.js.LICENSE.txt",
+    "static/media/error.gif": "/static/media/error.6617f447.gif",
+    "static/media/mjolnir.png": "/static/media/mjolnir.dd8446a3.png",
+    "static/media/vision.png": "/static/media/vision.76e8b3e1.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f0bb1af4.js",
+    "static/js/2.bbb1be49.chunk.js",
+    "static/css/main.8eed7bab.chunk.css",
+    "static/js/main.376a1135.chunk.js"
+  ]
+}
