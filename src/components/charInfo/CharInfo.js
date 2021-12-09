@@ -1,5 +1,5 @@
 import React from "react";
-import { Component } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 
 import Spinner from "../spinner/spinner";
@@ -9,88 +9,73 @@ import MarvelService from "../../services/MarvelService";
 
 import './charInfo.scss';
 
-class CharInfo extends Component {
-    state = {
-        char: null,
-        loading: false,
-        error: false
-    }
-  
-    marvelService = new MarvelService();
- 
-    componentDidMount() {
-        this.updateChar();
-    }
+const CharInfo = (props) => {
 
-    componentDidUpdate(prevProps){
-     
-        if (this.props.charId !== prevProps.charId) {
-            this.updateChar();
-        }     
-    }
+    const [char, setChar] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
 
-    updateChar = () => {
-        const { charId } = this.props;
+    const marvelService = new MarvelService();
+
+    useEffect(() => {
+        setChar();
+    }, [])
+
+    useEffect(() => {
+        setChar()
+    }, [props.charId])
+
+    const updateChar = () => {
+        const { charId } = props;
         if (!charId) {
             return;
         }
-       
-        this.onCharLoading();
 
-        this.marvelService
-            .getCharacter(charId)
-            .then(this.onCharLoaded)
-            .catch(this.onError)
-               
+        onCharLoading();
+
+        marvelService.getCharacter(charId)
+            .then(onCharLoaded)
+            .catch(onError)
     }
 
-    onCharLoaded = (char) => {
-        this.setState({
-            char,
-            loading: false
-        })
+    const onCharLoaded = (char) => {
+        setChar(char);
+        setLoading(false);
+
     }
 
-    onCharLoading = () => {
-        this.setState({
-            loading: true
-        })
+    const onCharLoading = () => {
+        setLoading(true);
     }
 
-    onError = () => {
-        this.setState({
-            loading: false,
-            error: true
-        })
+    const onError = () => {
+        setLoading(false);
+        setError(true);
     }
 
-    render() {
+    const skeleton = char || loading || error ? null : <Skeleton />;
+    const errorMessage = error ? <ErrorMessage /> : null;
+    const spinner = loading ? <Spinner /> : null;
+    const content = !(loading || error || !char) ? <View char={char} /> : null;
 
-        const { char, loading, error } = this.state;
-
-        const skeleton = char || loading || error ? null : <Skeleton/>;
-        const errorMessage = error ? <ErrorMessage/> : null;
-        const spinner = loading ? <Spinner/> : null;
-        const content = !(loading || error || !char) ? <View char={char}/> : null;
-
-        return (
-            <div className="char__info">
-                {skeleton}
-                {errorMessage}
-                {spinner}
-                {content}
-            </div>
-        )
-    }
+    return (
+        <div className="char__info">
+            {skeleton}
+            {errorMessage}
+            {spinner}
+            {content}
+        </div>
+    )
 }
 
-const View = ({char}) => {
+const View = ({ char }) => {
     const { name, decoration, thumbnail, homepage, wiki, comics } = char;
 
-    let imgStyle = {'objectFit': 'cover'};
+    let imgStyle = { 'objectFit': 'cover' };
     if (thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
-        imgStyle = {'objectFit': 'contain'};
+        imgStyle = { 'objectFit': 'contain' };
     }
+
     return (
         <>
             <div className="char__basics">
@@ -113,20 +98,20 @@ const View = ({char}) => {
             <div className="char__comics">Comics:</div>
             <ul className="char__comics-list">
                 {comics.length > 0 ? null : 'There no comis with this character'}
-                {       comics.map((item, i) => {
-                       
-                        return (
-                            <li key={i} className="char__comics-item">
-                                {item.name}
-                            </li>
-                        )
-                    })
+                {comics.map((item, i) => {
+
+                    return (
+                        <li key={i} className="char__comics-item">
+                            {item.name}
+                        </li>
+                    )
+                })
                 }
             </ul>
         </>
     )
 }
-CharInfo.propTypes={ 
+CharInfo.propTypes = {
     charId: PropTypes.number
 }
 export default CharInfo;
