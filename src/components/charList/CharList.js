@@ -95,7 +95,7 @@ const CharList = (props) => {
             {errorMessage}
             {spinner}
             {items}
-                <button
+            <button
                 className="button button__main button__long"
                 disabled={newItemLoading}
                 style={{ 'display': charEnded ? 'none' : 'block' }}
